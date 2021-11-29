@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: ServiceAccount 
+metadata:
+  name: py-k8s 
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: py-role 
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "watch", "list"]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: py-role 
+  namespace: default
+subjects:
+- kind: ServiceAccount 
+  name: py-k8s 
+roleRef:
+  kind: Role
+  name: py-role 
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: py-k8s 
+spec:
+  serviceAccountName: py-k8s 
+  containers:
+  - image: python:3
+    name: python
+    command:
+    - sleep 
+    - 24h

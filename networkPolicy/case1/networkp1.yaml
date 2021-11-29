@@ -1,0 +1,11 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-all
+  namespace: test
+spec:
+  podSelector: {}    # 匹配本命名空间所有pod
+  policyTypes:
+  - Ingress
+  - Egress
+  # ingress和egress没有指定规则, 则不允许任何流量进出Pod

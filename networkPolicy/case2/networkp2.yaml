@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deploy-all-namespace
+  namespace: test
+spec:
+  podSelector: {}    # 匹配本命名空间所有pod
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector: {} 
+    # 匹配本命名空间所有Pod
+    # 因为需求是本命名空间下所有pod可以相互访问,所以ingress规则匹配本命名空间所有pod
+    # 则其它命名空间的pod不能访问test命名空间的pod，相当于白名单

@@ -1,0 +1,24 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: pod-reader
+rules:
+- apiGroups: [""]   # 例如apps组 空值表示core 如namespace\pod\service\pv\pvc都在里面
+  resources: ["pods"]  # 资源名称(复数), 例如pods\deployments\services
+  verbs: ["get","watch","list"]  # 操作资源的方法
+---
+# 将主体和角色绑定
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: read-pods
+  namespace: default
+subjects:
+- kind: User   # 主体
+  name: aliang # 主体名称
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role   # 角色
+  name: pod-reader #角色名称
+  apiGroup: rbac.authorization.k8s.io  

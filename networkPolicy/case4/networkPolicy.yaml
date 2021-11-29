@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: app-to-app
+  namespace: test
+spec:
+  podSelector:   # 匹配本命名空间下的pod label为app: web的Pod
+    matchLabels:
+      app: web
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    # - namespaceSelector: {} # 若想匹配所有命名空间,则需要添加namespaceSelector
+    - podSelector:
+        matchLabels:
+          app: web-client
+    ports:
+    - protocol: TCP
+      port: 80

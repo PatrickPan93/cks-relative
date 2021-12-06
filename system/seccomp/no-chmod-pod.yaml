@@ -1,0 +1,19 @@
+# pods/no-chmod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: no-chmod-seccomp
+  labels:
+    app: no-chmod-seccomp
+spec:
+  securityContext:
+    seccompProfile:
+      type: Localhost
+      localhostProfile: chmod.json
+  containers:
+  - name: test-container
+    image: nginx:1.18.0
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "touch test; chmod +x test; while true; do sleep 30; done;" ]
+    securityContext:
+      allowPrivilegeEscalation: false

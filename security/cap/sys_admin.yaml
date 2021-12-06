@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cap-pod
+spec:
+  containers:
+  - image: busybox
+    name: test
+    command:
+    - sleep
+    - 24h
+    securityContext:
+      capabilities:
+        add: ["SYS_ADMIN"]

@@ -9,8 +9,8 @@ metadata:
   namespace: default
   name: py-role 
 rules:
-- apiGroups: [""]
-  resources: ["pods"]
+- apiGroups: ["","apps"]
+  resources: ["pods","deployments"]
   verbs: ["get", "watch", "list"]
 ---
 kind: RoleBinding

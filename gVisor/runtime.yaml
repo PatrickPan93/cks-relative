@@ -1,0 +1,5 @@
+apiVersion: node.k8s.io/v1 # RuntimeClass 定义于 node.k8s.io API 组 
+kind: RuntimeClass
+metadata:
+  name: gvisor # 用来引用 RuntimeClass 的名字 
+handler: runsc # 对应的 CRI 配置的名称

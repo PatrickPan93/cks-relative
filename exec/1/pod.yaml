@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: backend
+  name: backend
+spec:
+  serviceAccountName: build-robot
+  containers:
+  - image: nginx:1.18.0
+    name: nginx

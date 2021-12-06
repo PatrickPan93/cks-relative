@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: 8-nginx
+  name: 8-nginx
+  namespace: server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: 8-nginx
+  template:
+    metadata:
+      labels:
+        app: 8-nginx
+    spec:
+      containers:
+      - image: nginx:1.18.0
+        name: nginx

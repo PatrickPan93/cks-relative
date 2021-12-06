@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: web-pod
+  name: web-pod
+  namespace: db
+spec:
+  containers:
+  - image: nginx:1.18.0
+    name: web-pod

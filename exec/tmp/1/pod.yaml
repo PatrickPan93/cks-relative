@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: backend
+  name: backend
+spec:
+  serviceAccountName: new-sa
+  containers:
+  - image: nginx:1.18.0
+    name: web
